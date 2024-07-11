@@ -21,7 +21,7 @@ def send_post_request(user_id, point_range):
     response = requests.post(url, json=payload)
     return response.status_code, response.json()
 
-# Fungsi untuk hitung mundur 2 jam
+# Fungsi untuk hitung mundur
 def countdown(hours, minutes, seconds):
     total_seconds = hours * 3600 + minutes * 60 + seconds
     while total_seconds:
@@ -43,15 +43,16 @@ def main(point_range):
         status_code, response_data = send_post_request(user_id, point_range)
         print(f"Proses akun {index}/{total_users} | User ID: {user_id} | Status Code: {status_code} | Response: {response_data}")
         time.sleep(1)  # Memberikan jeda 1 detik antar permintaan
+    
+    # Hitung mundur 2 jam setelah semua permintaan selesai
+    print("Menunggu selama 2 jam sebelum menjalankan proses berikutnya...")
+    countdown(2, 0, 0)
 
 if __name__ == "__main__":
     # Meminta pengguna memasukkan rentang angka point_taped
     point_range_start = int(input("Masukkan angka awal untuk rentang point_taped: "))
     point_range_end = int(input("Masukkan angka akhir untuk rentang point_taped: "))
     point_range = (point_range_start, point_range_end)
-    
-    # Hitung mundur 2 jam
-    countdown(2, 0, 0)
     
     # Menjalankan fungsi utama
     main(point_range)
