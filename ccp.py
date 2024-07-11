@@ -19,7 +19,7 @@ def send_post_request(user_id, point_range):
         "level_limit": "2000"
     }
     response = requests.post(url, json=payload)
-    return response.status_code, response.json()
+    return point_taped, response.status_code, response.json()
 
 # Fungsi untuk hitung mundur
 def countdown(hours, minutes, seconds):
@@ -40,8 +40,8 @@ def main(point_range):
     print(f"Total akun: {total_users}")
     
     for index, user_id in enumerate(user_ids, start=1):
-        status_code, response_data = send_post_request(user_id, point_range)
-        print(f"Proses akun {index}/{total_users} | User ID: {user_id} | Status Code: {status_code} | Response: {response_data}")
+        point_taped, status_code, response_data = send_post_request(user_id, point_range)
+        print(f"Proses akun {index}/{total_users} | User ID: {user_id} | Point Taped: {point_taped} | Status Code: {status_code} | Response: {response_data}")
         time.sleep(1)  # Memberikan jeda 1 detik antar permintaan
     
     # Hitung mundur 2 jam setelah semua permintaan selesai
